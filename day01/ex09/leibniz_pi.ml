@@ -2,8 +2,12 @@ let leibniz_pi delta =
   if delta < 0.0 then -1
   else begin
     let ref = 4.0 *. (atan 1.0) in
+    let abs f =
+      if f < 0.0 then (-.f)
+      else f
+    in
     let rec leibniz_tail i pi =
-      if delta > abs_float (ref -. pi) then i
+      if delta > abs (ref -. pi) then i
       else begin
         let neg =
           if (i mod 2) = 1 then -1.0
