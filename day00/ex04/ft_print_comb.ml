@@ -15,7 +15,7 @@ let ft_print_comb () =
     end
   in
   loop 0 1 2;
-  print_char '\n'
+  print_string "\n"
 
 
 let main () =
