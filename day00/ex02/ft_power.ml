@@ -1,9 +1,9 @@
 let ft_power base degree =
-  let rec ft_power_tail degree ret =
-    if degree = 0 then ret
-    else ft_power_tail (degree - 1) (ret * base)
+  let rec loop i ret =
+    if i = 0 then ret
+    else loop (i - 1) (ret * base)
   in
-  ft_power_tail degree 1
+  loop degree 1
 
 
 let main () =

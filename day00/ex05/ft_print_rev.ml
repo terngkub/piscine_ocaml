@@ -5,13 +5,12 @@ let ft_print_rev str =
       loop (i - 1)
     end
   in
-  let len = String.length str in
-  loop (len - 1);
+  loop ((String.length str) - 1);
   print_char '\n'
 
 
 let main () =
-  ft_print_rev "Hello World !";
+  ft_print_rev "Hello world !";
   ft_print_rev ""
 
 

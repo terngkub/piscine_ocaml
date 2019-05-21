@@ -1,8 +1,8 @@
 let ft_print_alphabet () =
-  let rec loop curr =
-    if curr <= (int_of_char 'z') then begin
-      print_char (char_of_int curr);
-      loop (curr + 1)
+  let rec loop i =
+    if i <= (int_of_char 'z') then begin
+      print_char (char_of_int i);
+      loop (i + 1)
     end
   in
   loop (int_of_char 'a');

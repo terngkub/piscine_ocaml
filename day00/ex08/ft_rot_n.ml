@@ -1,16 +1,16 @@
 let ft_rot_n n str =
   let rot_char c =
-    if (c >= 'a' && c < 'z') || (c >= 'A' && c < 'Z') then
-      char_of_int (int_of_char(c) + 1)
-    else if (c == 'z') || (c == 'Z') then
-        char_of_int (int_of_char(c) - 25)
-    else c
+    if (c >= 'a') && (c <= 'z') then begin
+      let int_a = int_of_char 'a' in
+      let int_c = int_of_char c in
+      char_of_int (int_a + ((int_c - int_a + n) mod 26))
+    end else if (c >= 'A') && (c <= 'Z') then begin
+      let int_A = int_of_char 'A' in
+      let int_c = int_of_char c in
+      char_of_int (int_A + ((int_c - int_A + n) mod 26))
+    end else c
   in
-  let rec loop i =
-    if i <= 0 then str
-    else String.map rot_char (loop (i - 1))
-  in
-  loop n
+  String.map rot_char str
 
 
 let main () =
