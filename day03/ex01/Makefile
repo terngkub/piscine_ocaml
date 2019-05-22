@@ -1,6 +1,6 @@
 NAME = ft_graphics
 
-SOURCES = ft_graphics.ml
+SOURCES = gardening.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt
