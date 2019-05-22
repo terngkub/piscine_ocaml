@@ -40,7 +40,7 @@ $(NAME).opt: $(OPTOBJS)
 	$(CAMLFIND) $(CAMLOPT) -c $< $(LIBS)
 
 clean:
-	rm -f *.cm[iox] *.o
+	rm -f *.cm[iox] *.o .depend
 
 fclean: clean
 	rm -f $(NAME) $(NAME).opt $(NAME).byt
