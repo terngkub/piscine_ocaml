@@ -2,4 +2,6 @@ a.out
 *.cmi
 *.cmx
 *.o
+*.native
+_build
 .DS_Store
