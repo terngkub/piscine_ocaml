@@ -1,7 +1,11 @@
 a.out
 *.cmi
 *.cmx
+*.cmo
 *.o
+*.opt
+*.byt
 *.native
 _build
 .DS_Store
+.depend
