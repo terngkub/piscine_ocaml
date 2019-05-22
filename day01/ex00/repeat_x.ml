@@ -1,10 +1,12 @@
 let repeat_x n =
-  let rec tail_repeat_x i str =
-    if i = 0 then str
-    else if i < 0 then "Error"
-    else tail_repeat_x (i - 1) (str ^ "x")
-  in
-  tail_repeat_x n ""
+  if n < 0 then "Error"
+  else begin
+    let rec loop i ret =
+      if i = 0 then ret
+      else loop (i - 1) (ret ^ "x")
+    in
+    loop n ""
+  end
 
 
 let main () =

@@ -11,6 +11,8 @@ let iter f x n =
 
 
 let main () =
+  print_int (iter (fun x -> x * x) 2 (-1));
+  print_char '\n';
   print_int (iter (fun x -> x * x) 2 4);
   print_char '\n';
   print_int (iter (fun x -> x * 2) 2 4);

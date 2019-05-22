@@ -1,5 +1,5 @@
 let converges f x n =
-  if n = 0 then false
+  if n <= 0 then false
   else begin
     let rec loop i ret =
       if ret = (f ret) then true
