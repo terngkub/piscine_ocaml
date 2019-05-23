@@ -82,13 +82,22 @@ let generate_helix n =
   loop n []
 
 
+let reverse_list list =
+  let rec loop lst ret =
+    match lst with
+    | [] -> ret
+    | head :: tail -> loop tail (head :: ret)
+  in
+  loop list []
+
+
 let helix_to_string list =
   let rec loop lst ret =
     match lst with
     | [] -> ret
     | head :: tail -> loop tail ((string_of_nucleobase head.nucleobase) ^ ret)
   in
-  loop list ""
+  loop (reverse_list list) ""
 
 
 let complementary_nucleotide base =
@@ -101,15 +110,6 @@ let complementary_nucleotide base =
     | None -> 'X'
   in
   generate_nucleotide complementary_nucleobase
-
-
-let reverse_list list =
-  let rec loop lst ret =
-    match lst with
-    | [] -> ret
-    | head :: tail -> loop tail (head :: ret)
-  in
-  loop list []
 
 
 let complementary_helix list =

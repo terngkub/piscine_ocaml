@@ -103,7 +103,7 @@ let helix_to_string list =
     | [] -> ret
     | head :: tail -> loop tail ((string_of_nucleobase head.nucleobase) ^ ret)
   in
-  loop list ""
+  loop (reverse_list list) ""
 
 
 let complementary_helix list =
@@ -161,7 +161,7 @@ let rna_to_string list =
     | [] -> ret
     | head :: tail -> loop tail ((string_of_nucleobase head) ^ ret)
   in
-  loop list ""
+  loop (reverse_list list) ""
 
 (*
 * Test suite

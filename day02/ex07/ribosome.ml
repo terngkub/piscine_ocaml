@@ -103,7 +103,7 @@ let helix_to_string list =
     | [] -> ret
     | head :: tail -> loop tail ((string_of_nucleobase head.nucleobase) ^ ret)
   in
-  loop list ""
+  loop (reverse_list list) ""
 
 
 let complementary_helix list =
@@ -161,11 +161,11 @@ let rna_to_string list =
     | [] -> ret
     | head :: tail -> loop tail ((string_of_nucleobase head) ^ ret)
   in
-  loop list ""
+  loop (reverse_list list) ""
 
 
 (*
-* Type: protien
+* Type: protein
 *)
 
 type aminoacid = Stop | Ala | Arg | Asn | Asp | Cys | Gln | Glu | Gly | His | Ile | Leu | Lys | Met | Phe | Pro | Ser | Thr | Trp | Tyr | Val
@@ -203,7 +203,7 @@ let string_of_protein list =
     | head :: [] -> (string_of_aminoacid head) ^ ret
     | head :: tail -> loop tail (" " ^ (string_of_aminoacid head) ^ ret)
   in
-  loop list ""
+  loop (reverse_list list) ""
 
 
 let generate_bases_triplets list =
