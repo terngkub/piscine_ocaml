@@ -2,12 +2,12 @@ let encode list =
   let rec loop lst count ret =
     match lst with
     | [] -> ret
-    | head :: [] -> (head :: count :: ret)
+    | head :: [] -> (ret @ [head; count])
     | head :: next :: tail ->
       if head = next then
         loop (next :: tail) (count + 1) ret
       else
-        loop (next :: tail) 1 (head :: count :: ret)
+        loop (next :: tail) 1 (ret @ [head; count])
   in
   loop list 1 []
 
@@ -33,11 +33,13 @@ let sequence n =
 
 
 let main () =
+  print_endline (sequence (-1));
   print_endline (sequence 0);
   print_endline (sequence 1);
   print_endline (sequence 2);
   print_endline (sequence 3);
-  print_endline (sequence 4)
+  print_endline (sequence 4);
+  print_endline (sequence 5)
 
 
 let () =

@@ -1,51 +1,58 @@
 let reverse_list list =
-  let rec reverse_list_tail lst ret =
+  let rec loop lst ret =
     match lst with
     | [] -> ret
-    | head::tail -> reverse_list_tail tail (head::ret)
+    | head :: tail -> loop tail (head :: ret)
   in
-  reverse_list_tail list []
+  loop list []
 
 
 let encode list =
-  let rec encode_tail lst count ret =
+  let rec loop lst count ret =
     match lst with
     | [] -> ret
-    | head::[] -> (count, head)::ret
-    | head::next::tail ->
+    | head::[] -> (count, head) :: ret
+    | head :: next :: tail ->
       if head = next then
-        encode_tail (next::tail) (count + 1) ret
+        loop (next :: tail) (count + 1) ret
       else
-        encode_tail (next::tail) 1 ((count, head)::ret)
+        loop (next :: tail) 1 ((count, head) :: ret)
   in
-  let rev = encode_tail list 1 [] in
+  let rev = loop list 1 [] in
   reverse_list rev
 
 
+(*
+* Test suite
+*)
+
 let print_char_tuple_list list =
-  let rec print_loop lst =
+  let rec loop lst =
     match lst with
     | [] -> ()
-    | (v, k)::t -> print_int v; print_char k; print_loop t
+    | (value, key) :: tail -> print_int value; print_char key; loop tail
   in
-  print_loop list;
+  loop list;
   print_char '\n'
 
 
 let print_int_tuple_list list =
-  let rec print_loop lst =
+  let rec loop lst =
     match lst with
     | [] -> ()
-    | (v, k)::t -> print_int v; print_int k; print_loop t
+    | (value, key) :: tail -> print_int value; print_int key; loop tail
   in
-  print_loop list;
+  loop list;
   print_char '\n'
 
 
-let () =
+let main () =
   print_char_tuple_list (encode []);
   print_char_tuple_list (encode ['a']);
   print_char_tuple_list (encode ['a'; 'b']);
   print_char_tuple_list (encode ['a'; 'a']);
   print_char_tuple_list (encode ['a'; 'a'; 'b'; 'b'; 'c'; 'c'; 'a'; 'a']);
   print_int_tuple_list (encode [1; 2; 2; 1])
+
+
+let () = main ()

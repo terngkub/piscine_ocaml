@@ -1,37 +1,41 @@
+let rec contain lst elem =
+  match lst with
+  | [] -> false
+  | head :: tail ->
+    if head = elem then true
+    else contain tail elem
+
+
 let crossover list1 list2 =
-  let rec search lst elem =
-    match lst with
-    | [] -> false
-    | h::t ->
-    if h = elem then true
-    else search t elem
-  in
-  let rec crossover_tail lst ret =
+  let rec loop lst ret =
     match lst with
     | [] -> ret
-    | h::t ->
-    if (search list2 h) then crossover_tail t (h::ret)
-    else crossover_tail t ret
+    | head :: tail ->
+      if (contain list2 head) && (not (contain ret head)) then loop tail (head :: ret)
+      else loop tail ret
   in
-  crossover_tail list1 []
+  loop list1 []
 
+
+(*
+* Test suite
+*)
   
 let print_int_list list =
-  let rec print_tail lst =
+  let rec loop lst =
     match lst with
     | [] -> ()
-    | h::t ->
-    print_int h;
-    print_char ' ';
-    print_tail t
+    | head :: tail -> print_int head; print_char ' '; loop tail
   in
-  print_tail list;
+  loop list;
   print_char '\n'
 
 
 let main () =
   print_int_list (crossover [] []);
-  print_int_list (crossover [1; 2; 3; 4] [3; 2; 5; 0])
+  print_int_list (crossover [1; 2; 3; 4] [3; 2; 5; 0]);
+  print_int_list (crossover [1; 2; 3; 3; 4] [3; 2; 5; 0]);
+  print_int_list (crossover [1; 2; 3; 4] [3; 2; 5; 3; 0])
 
 
 let () = main ()
