@@ -165,7 +165,7 @@ let rna_to_string list =
 
 
 (*
-* Type: protien
+* Type: protein
 *)
 
 type aminoacid = Stop | Ala | Arg | Asn | Asp | Cys | Gln | Glu | Gly | His | Ile | Leu | Lys | Met | Phe | Pro | Ser | Thr | Trp | Tyr | Val
