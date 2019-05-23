@@ -29,13 +29,13 @@ let draw_rect_text x y str =
 let draw_tree tree =
 
   (* height *)
-  let tree_height = height tree in
+  let tree_height = (height tree) + 1 in
 
   (* box *)
   let box_size_x = 60 in
   let box_size_y = 30 in
   let box_margin_x = 40 in
-  let box_margin_y = 50 in
+  let box_margin_y = 70 in
 
   (* window *)
   let window_margin_x = 50 in
@@ -47,7 +47,6 @@ let draw_tree tree =
   let window_str = " " ^ (string_of_int window_size_x) ^ "x" ^ (string_of_int window_size_y) in
   Graphics.open_graph window_str;
 
-
   (* draw *)
   let rec draw_node x upper_y lower_y node =
     let middle_y = (upper_y + lower_y) / 2 in
@@ -56,16 +55,16 @@ let draw_tree tree =
     | Node (value, left, right) ->
       begin
         draw_rect_text x middle_y value;
-        if left <> Nil then begin
-          Graphics.moveto (x + (box_size_x / 2)) middle_y;
-          Graphics.lineto (x + (box_size_x / 2) + box_margin_x) ((upper_y + middle_y) / 2);
-          draw_node (x + box_size_x + box_margin_x) upper_y middle_y left
-        end;
-        if right <> Nil then begin
-          Graphics.moveto (x + (box_size_x / 2)) middle_y;
-          Graphics.lineto (x + (box_size_x / 2) + box_margin_x) ((middle_y + lower_y) / 2);
-          draw_node (x + box_size_x + box_margin_x) middle_y lower_y right
-        end
+
+        (* left *)
+        Graphics.moveto (x + (box_size_x / 2)) middle_y;
+        Graphics.lineto (x + (box_size_x / 2) + box_margin_x) ((upper_y + middle_y) / 2);
+        draw_node (x + box_size_x + box_margin_x) upper_y middle_y left;
+
+        (* right *)
+        Graphics.moveto (x + (box_size_x / 2)) middle_y;
+        Graphics.lineto (x + (box_size_x / 2) + box_margin_x) ((middle_y + lower_y) / 2);
+        draw_node (x + box_size_x + box_margin_x) middle_y lower_y right
       end
   in
   draw_node window_margin_x 0 window_size_y tree;

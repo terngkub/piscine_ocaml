@@ -1,25 +1,32 @@
-let caesar str n =
-  let rot_char c =
-    if (c >= 'a') && (c <= 'z') then begin
-      let int_a = int_of_char 'a' in
-      let int_c = int_of_char c in
-      char_of_int (int_a + ((int_c - int_a + n) mod 26))
-    end else if (c >= 'A') && (c <= 'Z') then begin
-      let int_A = int_of_char 'A' in
-      let int_c = int_of_char c in
-      char_of_int (int_A + ((int_c - int_A + n) mod 26))
-    end else c
-  in
-  String.map rot_char str
-  
+let rotate_n n c =
+  char_of_int (((int_of_char c) + n) mod 128)
+
 
 let rot42 str =
-  caesar str 42
+  String.map (rotate_n 42) str
 
 
-let xor str n =
+let caesar n str =
+  String.map (rotate_n n) str
+
+
+let xor n str =
   let xor_char c =
-    char_of_int (lxor (int_of_char c) n)
+    char_of_int ((int_of_char c) lxor n)
   in
   String.map xor_char str
 
+
+let ft_crypt str func_list =
+  let rec loop lst ret =
+    match lst with
+    | [] -> ret
+    | head :: tail -> loop tail (head str)
+  in loop func_list ""
+
+
+let main () =
+  print_endline (ft_crypt "abc" [(caesar 200)])
+
+
+let () = main ()
