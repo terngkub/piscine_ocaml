@@ -10,14 +10,16 @@ let rotn n c =
   end else c
 
 
-let caesar n str =
+let uncaesar n str =
   if n < 0 then "Error: key is negative"
   else if n = 0 then str
-  else String.map (rotn n) str
+  else 
+    let new_n = 26 - (n mod 26) in
+    String.map (rotn new_n) str
 
 
-let rot42 str =
-  String.map (rotn 42) str
+let unrot42 str =
+  String.map (rotn 10) str
 
 
 let is_printable c =
@@ -37,7 +39,7 @@ let xor n str =
   else String.map (xor_char n) str
 
 
-let ft_crypt str func_list =
+let ft_uncrypt str func_list =
   let rec loop lst ret =
     match lst with
     | [] -> ret
@@ -46,29 +48,29 @@ let ft_crypt str func_list =
 
 
 let main () =
-  print_endline "*************\nft_crypt\n*************\n";
+  print_endline "\n*************\nft_uncrypt\n*************\n";
 
   print_endline "basic:";
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [caesar 2]);
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [rot42]);
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [xor 2]);
+  print_endline (ft_uncrypt "cde_zab_CDE_ZAB" [uncaesar 2]);
+  print_endline (ft_uncrypt "qrs_nop_QRS_NOP" [unrot42]);
+  print_endline (ft_uncrypt "c`a]z{x]C@A]Z[X" [xor 2]);
 
   print_endline "\nmultiple:";
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [caesar 2; rot42]);
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [caesar 2; xor 2]);
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [caesar 2; rot42; xor 2]);
+  print_endline (ft_uncrypt "stu_pqr_STU_PQR" [unrot42; uncaesar 2]);
+  print_endline (ft_uncrypt "afg]xc`]AFG]XC@" [xor 2; uncaesar 2]);
+  print_endline (ft_uncrypt "qvw]rsp]QVW]RSP" [xor 2; unrot42; uncaesar 2]);
 
   print_endline "\nbig key:";
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [caesar 12345]);
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [xor 12345]);
+  print_endline (ft_uncrypt "vwx_stu_VWX_STU" [uncaesar 12345]);
+  print_endline (ft_uncrypt "X[ZfA@Cfx{zfa`c" [xor 12345]);
 
   print_endline "\nzero key:";
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [caesar 0]);
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [xor 0]);
+  print_endline (ft_uncrypt "abc_xyz_ABC_XYZ" [uncaesar 0]);
+  print_endline (ft_uncrypt "abc_xyz_ABC_XYZ" [xor 0]);
 
   print_endline "\nnegative key:";
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [caesar (-2)]);
-  print_endline (ft_crypt "abc_xyz_ABC_XYZ" [xor (-2)])
+  print_endline (ft_uncrypt "abc_xyz_ABC_XYZ" [uncaesar (-2)]);
+  print_endline (ft_uncrypt "abc_xyz_ABC_XYZ" [xor (-2)])
 
 
 let () = main ()
