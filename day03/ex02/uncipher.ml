@@ -39,7 +39,7 @@ let xor n str =
   else String.map (xor_char n) str
 
 
-let ft_uncrypt str func_list =
+let ft_uncrypt (str:string) (func_list:(string->string)list) :string =
   let rec loop lst ret =
     match lst with
     | [] -> ret

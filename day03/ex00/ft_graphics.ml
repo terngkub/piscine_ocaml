@@ -38,11 +38,20 @@ let draw_tree_node node =
 
 
 let main () =
+  (* draw_square *)
   Graphics.open_graph " 400x300";
   draw_square 50 50 20;
-  ignore (Graphics.read_key ());
+  ignore (read_line ());
+
+  (* draw_tree_node Node *)
   Graphics.open_graph " 400x300";
   draw_tree_node (Node ("hello", Nil, Nil));
-  ignore (Graphics.read_key ())
+  ignore (read_line ());
+
+  (* draw_tree_node Nil *)
+  Graphics.open_graph " 400x300";
+  draw_tree_node (Nil);
+  ignore (read_line ())
+
 
 let () = main ()

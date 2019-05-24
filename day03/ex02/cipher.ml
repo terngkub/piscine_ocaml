@@ -10,14 +10,14 @@ let rotn n c =
   end else c
 
 
+let rot42 str =
+  String.map (rotn 42) str
+
+
 let caesar n str =
   if n < 0 then "Error: key is negative"
   else if n = 0 then str
   else String.map (rotn n) str
-
-
-let rot42 str =
-  String.map (rotn 42) str
 
 
 let is_printable c =
@@ -37,7 +37,7 @@ let xor n str =
   else String.map (xor_char n) str
 
 
-let ft_crypt str func_list =
+let ft_crypt (str:string) (func_list:(string->string)list) :string =
   let rec loop lst ret =
     match lst with
     | [] -> ret

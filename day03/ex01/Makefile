@@ -1,4 +1,4 @@
-NAME = ft_graphics
+NAME = gardening
 
 SOURCES = gardening.ml
 

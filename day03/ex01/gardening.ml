@@ -70,26 +70,35 @@ let draw_tree tree =
   draw_node window_margin_x 0 window_size_y tree;
 
   (* wait *)
-  ignore (Graphics.read_key ())
+  ignore (Graphics.read_key ());
+  Graphics.close_graph ()
 
 
 let main () =
-  let h = Node ("H", Nil, Nil) in
+  (* Full tree *)
   let g = Node ("G", Nil, Nil) in
   let f = Node ("F", Nil, Nil) in
-  let e = Node ("E", g, h) in
+  let e = Node ("E", g, Nil) in
   let d = Node ("D", Nil, Nil) in
   let c = Node ("C", Nil, f) in
   let b = Node ("B", d, e) in
   let a = Node ("A", b, c) in
-  print_string "Size: ";
-  print_int (size a);
-  print_char '\n';
-  print_string "Height: ";
-  print_int (height a);
-  print_char '\n';
+  print_endline "Basic Tree:";
+  print_string "Size: "; print_int (size a); print_char '\n';
+  print_string "Height: "; print_int (height a); print_char '\n';
   draw_tree a;
-  ()
 
+  (* Nil *)
+  print_endline "Nil Tree:";
+  print_string "Size: "; print_int (size Nil); print_char '\n';
+  print_string "Height: "; print_int (height Nil); print_char '\n';
+  draw_tree Nil;
+
+  (* One Node *)
+  let one_node = Node ("A", Nil, Nil) in
+  print_endline "One Node Tree:";
+  print_string "Size: "; print_int (size one_node); print_char '\n';
+  print_string "Height: "; print_int (height one_node); print_char '\n';
+  draw_tree one_node
 
 let () = main ()
