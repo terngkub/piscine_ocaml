@@ -12,7 +12,7 @@ let rec print_color_list_verbose = function
 
 let main () =
 
-  let all = Color.all () in
+  let all = Color.all in
   print_color_list all;
   print_color_list_verbose all
 

@@ -14,6 +14,11 @@ let main () =
   let all = Value.all in
   print_value_list all;
   print_value_list_verbose all;
+
+  print_string ("T10 int: ");
+  print_int (Value.toInt T10);
+  print_char '\n';
+
   print_endline ("T10 next: " ^ (Value.toString (Value.next T10)));
   print_endline ("T10 previous: " ^ (Value.toString (Value.previous T10)))
 

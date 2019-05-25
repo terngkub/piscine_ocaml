@@ -232,6 +232,9 @@ end
 type t = Card.t list
 
 
+exception Failure of string
+
+
 let newDeck () :t =
   let random_list =
     Random.self_init ();
@@ -252,5 +255,5 @@ let toStringListVerbose (deck:t) =
 
 let drawCard (deck:t) :Card.t * t =
   match deck with
-  | [] -> failwith "Error: deck is empty"
+  | [] -> raise (Failure "deck is empty")
   | head :: tail -> (head, tail)
