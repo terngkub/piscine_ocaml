@@ -121,110 +121,110 @@ module Card = struct
   end
 
 
-    type t = {
-      value : Value.t;
-      color : Color.t
+  type t = {
+    value : Value.t;
+    color : Color.t
+  }
+
+
+  let newCard value color =
+    {
+      value = value;
+      color = color
     }
 
 
-    let newCard value color =
-      {
-        value = value;
-        color = color
-      }
+  let allSpades =
+    let new_spade value =
+      newCard value Color.Spade
+    in
+    List.map new_spade Value.all 
 
 
-    let allSpades =
-      let new_spade value =
-        newCard value Color.Spade
-      in
-      List.map new_spade Value.all 
+  let allHearts =
+    let new_heart value =
+      newCard value Color.Heart
+    in
+    List.map new_heart Value.all
 
 
-    let allHearts =
-      let new_heart value =
-        newCard value Color.Heart
-      in
-      List.map new_heart Value.all
+  let allDiamonds =
+    let new_diamond value =
+      newCard value Color.Diamond
+    in
+    List.map new_diamond Value.all
 
 
-    let allDiamonds =
-      let new_diamond value =
-        newCard value Color.Diamond
-      in
-      List.map new_diamond Value.all
+  let allClubs =
+    let new_club value =
+      newCard value Color.Club
+    in
+    List.map new_club Value.all
 
 
-    let allClubs =
-      let new_club value =
-        newCard value Color.Club
-      in
-      List.map new_club Value.all
+  let all = allSpades @ allHearts @ allDiamonds @ allClubs
 
 
-    let all = allSpades @ allHearts @ allDiamonds @ allClubs
+  let getValue (card:t) = card.value
 
 
-    let getValue (card:t) = card.value
+  let getColor (card:t) = card.color
 
 
-    let getColor (card:t) = card.color
+  let toString (card:t) =
+    Printf.sprintf "%s%s" (Value.toString card.value) (Color.toString card.color)
 
 
-    let toString (card:t) =
-      Printf.sprintf "%s%s" (Value.toString card.value) (Color.toString card.color)
+  let toStringVerbose (card:t) =
+    Printf.sprintf "Card(%s, %s)" (Value.toStringVerbose card.value) (Color.toStringVerbose card.color)
 
 
-    let toStringVerbose (card:t) =
-      Printf.sprintf "Card(%s, %s)" (Value.toStringVerbose card.value) (Color.toStringVerbose card.color)
+  let compare (one:t) (two:t) =
+    if one > two then 1
+    else if one < two then (-1)
+    else 0
 
 
-    let compare (one:t) (two:t) =
-      if one > two then 1
-      else if one < two then (-1)
-      else 0
+  let max (one:t) (two:t) =
+    if compare one two >= 0 then one
+    else two
 
 
-    let max (one:t) (two:t) =
-      if compare one two >= 0 then one
-      else two
+  let min (one:t) (two:t) =
+    if compare one two < 0 then one
+    else two
 
 
-    let min (one:t) (two:t) =
-      if compare one two < 0 then one
-      else two
+  let best (lst:t list) =
+    match lst with
+    | [] -> invalid_arg "Error: empty list"
+    | head :: [] -> head
+    | head :: tail -> List.fold_left max head tail
 
 
-    let best (lst:t list) =
-      match lst with
-      | [] -> invalid_arg "Error: empty list"
-      | head :: [] -> head
-      | head :: tail -> List.fold_left max head tail
+  let isOf card color =
+    if card.color = color then true
+    else false
+    
+
+  let isSpade card =
+    if card.color = Spade then true
+    else false
 
 
-    let isOf card color =
-      if card.color = color then true
-      else false
-      
-
-    let isSpade card =
-      if card.color = Spade then true
-      else false
+  let isHeart card =
+    if card.color = Heart then true
+    else false
 
 
-    let isHeart card =
-      if card.color = Heart then true
-      else false
+  let isDiamond card =
+    if card.color = Diamond then true
+    else false
 
 
-    let isDiamond card =
-      if card.color = Diamond then true
-      else false
-
-
-    let isClub card =
-      if card.color = Club then true
-      else false
+  let isClub card =
+    if card.color = Club then true
+    else false
 
 end
 
@@ -232,7 +232,7 @@ end
 type t = Card.t list
 
 
-let newDeck () =
+let newDeck () :t =
   let random_list =
     Random.self_init ();
     let create_random_pair elem = (Random.bits (), elem) in
@@ -242,11 +242,11 @@ let newDeck () =
   List.map snd sorted
 
 
-let toStringList deck =
+let toStringList (deck:t) =
   List.map Card.toString deck
 
 
-let toStringListVerbose deck =
+let toStringListVerbose (deck:t) =
   List.map Card.toStringVerbose deck
 
 
