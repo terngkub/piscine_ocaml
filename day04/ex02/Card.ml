@@ -119,102 +119,107 @@ module Value = struct
 end
 
 
-type t = {
-  value : Value.t;
-  color : Color.t
-}
-
-
-let newCard value color =
-  {
-    value = value;
-    color = color
+  type t = {
+    value : Value.t;
+    color : Color.t
   }
 
 
-let allSpades =
-  let new_spade value =
-    newCard value Color.Spade
-  in
-  List.map new_spade Value.all 
+  let newCard value color =
+    {
+      value = value;
+      color = color
+    }
 
 
-let allHearts =
-  let new_heart value =
-    newCard value Color.Heart
-  in
-  List.map new_heart Value.all
+  let allSpades =
+    let new_spade value =
+      newCard value Color.Spade
+    in
+    List.map new_spade Value.all 
 
 
-let allDiamonds =
-  let new_diamond value =
-    newCard value Color.Diamond
-  in
-  List.map new_diamond Value.all
+  let allHearts =
+    let new_heart value =
+      newCard value Color.Heart
+    in
+    List.map new_heart Value.all
 
 
-let allClubs =
-  let new_club value =
-    newCard value Color.Club
-  in
-  List.map new_club Value.all
+  let allDiamonds =
+    let new_diamond value =
+      newCard value Color.Diamond
+    in
+    List.map new_diamond Value.all
 
 
-let all = allSpades @ allHearts @ allDiamonds @ allClubs
+  let allClubs =
+    let new_club value =
+      newCard value Color.Club
+    in
+    List.map new_club Value.all
 
 
-let getValue (card:t) = card.value
+  let all = allSpades @ allHearts @ allDiamonds @ allClubs
 
 
-let getColor (card:t) = card.color
+  let getValue (card:t) = card.value
 
 
-let toString (card:t) =
-  Printf.sprintf "%s%s" (Value.toString card.value) (Color.toString card.color)
+  let getColor (card:t) = card.color
 
 
-let toStringVerbose (card:t) =
-  Printf.sprintf "Card(%s, %s)" (Value.toStringVerbose card.value) (Color.toStringVerbose card.color)
+  let toString (card:t) =
+    Printf.sprintf "%s%s" (Value.toString card.value) (Color.toString card.color)
 
 
-let compare one two =
-  (Value.toInt one.value) - (Value.toInt two.value)
+  let toStringVerbose (card:t) =
+    Printf.sprintf "Card(%s, %s)" (Value.toStringVerbose card.value) (Color.toStringVerbose card.color)
 
 
-let max one two =
-  if compare one two >= 0 then one
-  else two
+  let compare (one:t) (two:t) =
+    if one > two then 1
+    else if one < two then (-1)
+    else 0
 
 
-let min one two =
-  if compare one two < 0 then one
-  else two
+  let max (one:t) (two:t) =
+    if compare one two >= 0 then one
+    else two
 
 
-let best list =
-  List.fold_left max list
+  let min (one:t) (two:t) =
+    if compare one two < 0 then one
+    else two
 
 
-let isOf card color =
-  if card.color = color then true
-  else false
-  
-
-let isSpade card =
-  if card.color = Spade then true
-  else false
+  let best (lst:t list) =
+    match lst with
+    | [] -> invalid_arg "Error: empty list"
+    | head :: [] -> head
+    | head :: tail -> List.fold_left max head tail
 
 
-let isHeart card =
-  if card.color = Heart then true
-  else false
+  let isOf card color =
+    if card.color = color then true
+    else false
+    
+
+  let isSpade card =
+    if card.color = Spade then true
+    else false
 
 
-let isDiamond card =
-  if card.color = Diamond then true
-  else false
+  let isHeart card =
+    if card.color = Heart then true
+    else false
 
 
-let isClub card =
-  if card.color = Club then true
-  else false
+  let isDiamond card =
+    if card.color = Diamond then true
+    else false
+
+
+  let isClub card =
+    if card.color = Club then true
+    else false
