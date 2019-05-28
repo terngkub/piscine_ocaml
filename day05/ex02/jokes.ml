@@ -4,11 +4,11 @@ let print_joke (jokes:string array) =
 
 let main () =
   let jokes = [|
-    "Joke 1";
-    "Joke 2";
-    "Joke 3";
-    "Joke 4";
-    "Joke 5";
+    "Joke 1. I'm lazy, you know.";
+    "Joke 2. I'm lazy, you know.";
+    "Joke 3. I'm lazy, you know.";
+    "Joke 4. I'm lazy, you know.";
+    "Joke 5. I'm lazy, you know.";
   |] in
   print_joke jokes
 

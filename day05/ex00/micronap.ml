@@ -1,6 +1,5 @@
 let my_sleep () = Unix.sleep 1
 
-(* TODO handle parsing *)
 
 let main () =
   let argv = Sys.argv in

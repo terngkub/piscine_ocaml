@@ -16,16 +16,14 @@ let get_jokes (jokes_list:string list) :string array =
 let read_input (file_name:string) :string list =
   let ic = open_in file_name in
   let lst = ref [] in
-  let continue = ref true in
-  while !continue do
-    try 
+  try 
+    while true do
       let str = input_line ic in
       lst := (str :: !lst)
-    with
-    | End_of_file -> continue := false
-  done;
-  close_in ic;
-  !lst
+    done;
+    close_in ic; !lst
+  with
+  | End_of_file -> close_in ic; !lst
 
 
 let main () =
