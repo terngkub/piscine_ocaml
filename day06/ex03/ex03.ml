@@ -47,7 +47,8 @@ module Make : MAKE =
 
 
     let of_int (i:int) :t =
-      i lsl FractionalBits.bits
+      if i >= 0 then i lsl FractionalBits.bits
+      else ((lnot i) + 1) lsl FractionalBits.bits
 
 
     let to_float (fixed:t) :float =
@@ -110,10 +111,10 @@ module Make : MAKE =
     let sub (one:t) (two:t) :t = one - two
 
     
-    let mul (one:t) (two:t) :t = one * two
+    let mul (one:t) (two:t) :t = of_float ((to_float one) *. (to_float two))
 
     
-    let div (one:t) (two:t) :t = one / two
+    let div (one:t) (two:t) :t = of_float ((to_float one) /. (to_float two))
 
 
     let foreach (start:t) (stop:t) (func:(t -> unit)) :unit =
@@ -134,4 +135,86 @@ let () =
   let y8 = Fixed8.of_float 21.32 in
   let r8 = Fixed8.add x8 y8 in
   print_endline (Fixed8.to_string r8);
-  Fixed4.foreach (Fixed4.zero) (Fixed4.one) (fun f -> print_endline (Fixed4.to_string f))
+  Fixed4.foreach (Fixed4.zero) (Fixed4.one) (fun f -> print_endline (Fixed4.to_string f));
+
+  (* of_int, to_int *)
+  print_char '\n';
+  print_string "of_int 42: ";
+  let a = Fixed8.of_int 42 in
+  print_int (Fixed8.to_int a);
+  print_char '\n';
+  print_char '\n';
+
+  (* zero, one *)
+  print_string "zero: ";
+  print_endline (Fixed8.to_string Fixed8.zero);
+  print_string "one: ";
+  print_endline (Fixed8.to_string Fixed8.one);
+  print_char '\n';
+
+  (* succ, pred *)
+  print_string "succ 1: ";
+  print_endline (Fixed8.to_string (Fixed8.succ Fixed8.one));
+  print_string "pred 1: ";
+  print_endline (Fixed8.to_string (Fixed8.pred Fixed8.one));
+  print_char '\n';
+
+  (* min, max *)
+  print_string "min 0 1: ";
+  print_endline (Fixed8.to_string (Fixed8.min Fixed8.zero Fixed8.one));
+  print_string "max 0 1: ";
+  print_endline (Fixed8.to_string (Fixed8.max Fixed8.zero Fixed8.one));
+  print_char '\n';
+
+  (* gth, lth, gte, lte, eqp, eqs *)
+  print_string "gth 0 1: ";
+  print_endline (string_of_bool (Fixed8.gth Fixed8.zero Fixed8.one));
+  print_string "gth 1 0: ";
+  print_endline (string_of_bool (Fixed8.gth Fixed8.one Fixed8.zero));
+  print_char '\n';
+
+  print_string "lth 0 1: ";
+  print_endline (string_of_bool (Fixed8.lth Fixed8.zero Fixed8.one));
+  print_string "lth 1 0: ";
+  print_endline (string_of_bool (Fixed8.lth Fixed8.one Fixed8.zero));
+  print_char '\n';
+
+  print_string "gte 0 0: ";
+  print_endline (string_of_bool (Fixed8.gte Fixed8.zero Fixed8.zero));
+  print_string "gte 0 1: ";
+  print_endline (string_of_bool (Fixed8.gte Fixed8.zero Fixed8.one));
+  print_string "gte 1 0: ";
+  print_endline (string_of_bool (Fixed8.gte Fixed8.one Fixed8.zero));
+  print_char '\n';
+
+  print_string "lte 0 0: ";
+  print_endline (string_of_bool (Fixed8.lte Fixed8.zero Fixed8.one));
+  print_string "lte 0 1: ";
+  print_endline (string_of_bool (Fixed8.lte Fixed8.zero Fixed8.one));
+  print_string "lte 1 0: ";
+  print_endline (string_of_bool (Fixed8.lte Fixed8.one Fixed8.zero));
+  print_char '\n';
+
+  print_string "eqp 0 0: ";
+  print_endline (string_of_bool (Fixed8.eqp Fixed8.zero Fixed8.zero));
+  print_string "eqp 0 1: ";
+  print_endline (string_of_bool (Fixed8.eqp Fixed8.zero Fixed8.one));
+  print_char '\n';
+
+  print_string "eqs 0 0: ";
+  print_endline (string_of_bool (Fixed8.eqs Fixed8.zero Fixed8.zero));
+  print_string "eqs 0 1: ";
+  print_endline (string_of_bool (Fixed8.eqs Fixed8.zero Fixed8.one));
+  print_char '\n';
+
+  (* add, sub, mul, div *)
+  let a = Fixed8.of_int 42 in
+  let b = Fixed8.of_int 2 in
+  print_string "add 42 2: ";
+  print_endline (Fixed8.to_string (Fixed8.add a b));
+  print_string "sub 42 2: ";
+  print_endline (Fixed8.to_string (Fixed8.sub a b));
+  print_string "mul 42 2: ";
+  print_endline (Fixed8.to_string (Fixed8.mul a b));
+  print_string "div 42 2: ";
+  print_endline (Fixed8.to_string (Fixed8.div a b));
