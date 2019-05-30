@@ -12,11 +12,8 @@ WITHGRAPHICS = -package Graphics
 
 all: .depend $(NAME)
 
-$(NAME): opt byt
+$(NAME): $(NAME).opt $(NAME).byt
 	ln -fs $(NAME).opt $(NAME)
-
-opt: $(NAME).opt
-byt: $(NAME).byt
 
 OBJS = $(SOURCES:.ml=.cmo)
 OPTOBJS = $(SOURCES:.ml=.cmx)
