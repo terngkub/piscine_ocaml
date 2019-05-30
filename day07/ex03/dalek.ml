@@ -34,7 +34,8 @@ object
 
 
   method exterminate (people:People.people) =
-    people#die
+    people#die;
+    shield <- not shield
 
 
   method die =

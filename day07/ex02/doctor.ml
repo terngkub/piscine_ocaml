@@ -6,6 +6,15 @@ object
   val sidekick:People.people = new People.people
   val mutable hp:int = 100
 
+  method set_hp new_hp =
+    hp <- new_hp
+
+  method get_sidekick =
+    sidekick
+
+  method set_sidekick_hp new_hp =
+    sidekick#set_hp new_hp
+
   method to_string =
     name
     ^ " ("
@@ -22,7 +31,25 @@ object
 
   method travel_in_time (start:int) (arrival:int) =
     age <- (age + (arrival - start));
-    print_endline "draw TARDIS"
+    print_endline "
+    _______(_@_)_______
+    | POLICE      BOX |
+    |_________________|
+     | _____ | _____ |
+     | |###| | |###| |
+     | |###| | |###| |   
+     | _____ | _____ |   
+     | || || | || || |
+     | ||_|| | ||_|| |  
+     | _____ |$_____ |  
+     | || || | || || |  
+     | ||_|| | ||_|| | 
+     | _____ | _____ |
+     | || || | || || |   
+     | ||_|| | ||_|| |         
+     |       |       |        
+     *****************
+    "
 
   method use_sonic_screwdriver =
     print_endline "Whiiiiwhiiiwhiii Whiiiiwhiiiwhiii Whiiiiwhiiiwhiii"

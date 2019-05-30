@@ -1,16 +1,19 @@
-class ['a] army (member_instance:'a) =
+class ['a] army =
 object
 
-  val member:('a list) = [member_instance]
+  val mutable member:('a list) = []
 
-  (* TODO add instance *)
-  method add =
-    {< member = member >}
+
+  method add (new_member:'a) =
+    member <- new_member :: member
 
 
   method delete =
     match member with
-    | _ :: tail -> {< member = tail >}
-    | [] -> {< member = [] >}
+    | _ :: tail -> member <- tail
+    | [] -> ()
+
+  
+  method get_member = member
 
 end

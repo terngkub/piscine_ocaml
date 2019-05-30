@@ -22,7 +22,25 @@ object
 
   method travel_in_time (start:int) (arrival:int) =
     age <- (age + (arrival - start));
-    print_endline "draw TARDIS"
+    print_endline "
+    _______(_@_)_______
+    | POLICE      BOX |
+    |_________________|
+     | _____ | _____ |
+     | |###| | |###| |
+     | |###| | |###| |   
+     | _____ | _____ |   
+     | || || | || || |
+     | ||_|| | ||_|| |  
+     | _____ |$_____ |  
+     | || || | || || |  
+     | ||_|| | ||_|| | 
+     | _____ | _____ |
+     | || || | || || |   
+     | ||_|| | ||_|| |         
+     |       |       |        
+     *****************
+    "
 
   method use_sonic_screwdriver =
     print_endline "Whiiiiwhiiiwhiii Whiiiiwhiiiwhiii Whiiiiwhiiiwhiii"

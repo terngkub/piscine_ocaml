@@ -7,13 +7,14 @@ object
     let c2 = char_of_int ((int_of_char 'a') + Random.int 26) in
     let c3 = char_of_int ((int_of_char 'a') + Random.int 26) in
     "Dalek" ^ (String.make 1 c1) ^ (String.make 1 c2) ^ (String.make 1 c3)
-  
-
-  val hp:int = 100
-
-
+  val mutable hp:int = 100
   val mutable shield:bool = true
   
+  method set_hp (new_hp:int) =  
+    hp <- new_hp
+
+  method set_shield b =
+    shield <- b
 
   method to_string =
     name
@@ -21,7 +22,6 @@ object
     ^ "hp: " ^ (string_of_int hp)
     ^ ", sield: " ^ (string_of_bool shield)
     ^ ")"
-
 
   method talk =
     Random.self_init ();
@@ -32,10 +32,9 @@ object
     | 2 -> print_endline "I obey!"
     | _ -> print_endline "You are the doctor! You are the enemy of the Daleks!"
 
-
   method exterminate (people:People.people) =
-    people#die
-
+    people#die;
+    shield <- not shield
 
   method die =
     print_endline "Emergency Temporal Shift!"

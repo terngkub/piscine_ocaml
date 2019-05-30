@@ -13,6 +13,6 @@ object (self)
     print_endline "Aaaarghh!"
 
   initializer
-    print_endline "People is initialized.")
+    print_endline "People is initialized."
 
 end

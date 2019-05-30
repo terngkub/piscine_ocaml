@@ -2,7 +2,10 @@ class people =
 object
 
   val name:string = "Someone"
-  val hp:int = 100
+  val mutable hp:int = 100
+
+  method set_hp new_hp =
+    hp <- new_hp
 
   method to_string =
     name ^ " (hp: " ^ (string_of_int hp) ^ ")"
