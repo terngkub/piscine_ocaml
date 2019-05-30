@@ -13,6 +13,8 @@ object
   method set_hp (new_hp:int) =  
     hp <- new_hp
 
+  method get_shield = shield
+
   method set_shield b =
     shield <- b
 
