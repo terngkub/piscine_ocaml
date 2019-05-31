@@ -1,6 +1,6 @@
-NAME = reaction
+NAME = alkane_combustion
 
-SOURCES = atom.ml molecule.ml alkane.ml reaction.ml main.ml
+SOURCES = utils.ml atom.ml molecule.ml alkane.ml reaction.ml main.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt
