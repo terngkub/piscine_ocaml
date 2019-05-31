@@ -1,9 +1,8 @@
 class alkane n =
-object
+object (this)
 
   inherit Molecule.molecule
-
-  method name =
+  (
     match n with
     | 1 -> "Methane"
     | 2 -> "Ethane"
@@ -18,9 +17,19 @@ object
     | 11 -> "Undecane"
     | 12 -> "Dodecane"
     | _ -> "Some alkane"
-
-  method formula =
-    "C" ^ (string_of_int n) ^ "H" ^ (string_of_int ((n * 2) + 2))
+  )
+  (
+      let add_atom lst atom n =
+        let rec loop i ret =
+          if i >= n then ret
+          else loop (i + 1) (atom :: ret)
+        in
+        loop 0 lst
+      in
+      let hydrogen_list = add_atom [] (new Atom.hydrogen) (n * 2 + 2) in
+      let carbon_list = add_atom hydrogen_list (new Atom.carbon) n in
+      carbon_list
+  )
 
 end
 

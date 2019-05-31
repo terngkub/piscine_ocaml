@@ -10,8 +10,20 @@ object (this)
 
   method equals (that:atom) =
     (this#name = that#name) && (this#symbol = that#symbol) && (this#atomic_number = that#atomic_number)
-
+  
 end
+
+let compare (this:atom) (that:atom) =
+  (* C *)
+  if this#name = "C" && that#name <> "C" then 1
+  else if that#name = "C" && this#name <> "C" then (-1)
+  else if this#name = "C" && that#name = "C" then 0
+  (* H *)
+  else if this#name = "H" && that#name <> "H" then 1
+  else if that#name = "H" && this#name <> "H" then (-1)
+  else if this#name = "H" && that#name = "H" then 0
+  (* alphabet *)
+  else compare this#name that#name
 
 
 class hydrogen =

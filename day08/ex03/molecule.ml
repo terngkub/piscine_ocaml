@@ -1,8 +1,20 @@
-class virtual molecule =
+class virtual molecule (atom_name:string) (atom_list:Atom.atom list) =
 object (this)
 
-  method virtual name : string
-  method virtual formula : string
+  method private hill_list =
+    let sorted_list = List.sort Atom.compare atom_list in
+    Utils.encode sorted_list
+
+  method name = atom_name
+
+  method formula =
+    let rec loop lst ret =
+      match lst with
+      | head :: tail when snd head = 1 -> loop tail (ret ^ (fst head)#symbol)
+      | head :: tail when snd head <> 1 -> loop tail (ret ^ (fst head)#symbol ^ (string_of_int (snd head)))
+      | _ -> ret
+    in
+    loop this#hill_list ""
 
   method to_string =
     this#name ^ " (" ^ this#formula ^ ")"
@@ -15,39 +27,29 @@ end
 
 class water =
 object
-  inherit molecule
-  method name = "Water"
-  method formula = "H2O"
+  inherit molecule "Water" [new Atom.hydrogen; new Atom.hydrogen; new Atom.oxygen]
 end
 
 
 class carbon_dioxide =
 object
-  inherit molecule
-  method name = "Carbon dioxide"
-  method formula = "CO2"
+  inherit molecule "Carbon dioxide" [new Atom.carbon; new Atom.oxygen; new Atom.oxygen]
 end
 
 
 class carbon_monoxide =
 object
-  inherit molecule
-  method name = "Carbon Monoxide"
-  method formula = "CO"
+  inherit molecule "Carbon monoxide" [new Atom.carbon; new Atom.oxygen]
 end
 
 
 class glucose =
 object
-  inherit molecule
-  method name = "Glucose"
-  method formula = "C6H12O6"
+  inherit molecule "Glucose" [new Atom.carbon; new Atom.carbon; new Atom.carbon; new Atom.carbon; new Atom.carbon; new Atom.carbon; new Atom.carbon; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.oxygen; new Atom.oxygen; new Atom.oxygen; new Atom.oxygen; new Atom.oxygen; new Atom.oxygen]
 end
 
 
 class alcohol =
 object
-  inherit molecule
-  method name = "Alcolhol"
-  method formula = "C2H6O"
+  inherit molecule "Alcohol" [new Atom.carbon; new Atom.carbon; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.hydrogen; new Atom.oxygen]
 end

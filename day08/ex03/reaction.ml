@@ -5,10 +5,3 @@ object
   method virtual balance: reaction
   method virtual is_balanced: bool
 end
-
-
-class alkane_combustion alkane list =
-object
-  inherit reaction
-
-end
