@@ -1,6 +1,6 @@
 NAME = molecule
 
-SOURCES = atom.ml molecule.ml main.ml
+SOURCES = utils.ml atom.ml molecule.ml main.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt
