@@ -1,6 +1,6 @@
 NAME = alkane
 
-SOURCES = atom.ml molecule.ml alkane.ml main.ml
+SOURCES = utils.ml atom.ml molecule.ml alkane.ml main.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt
