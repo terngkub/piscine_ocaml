@@ -68,6 +68,22 @@ module Calc_float = Calc (FLOAT)
 
 
 let () =
-  print_endline (string_of_int (Calc_int.add 20 1));
+  print_endline "subject:";
   print_endline (string_of_int (Calc_int.power 3 3));
-  print_endline (string_of_float (Calc_float.power 3.0 3))
+  print_endline (string_of_float (Calc_float.power 3.0 3));
+  print_endline (string_of_int (Calc_int.mul (Calc_int.add 20 1) 2));
+  print_endline (string_of_float (Calc_float.mul (Calc_float.add 20.0 1.0) 2.0));
+
+  print_endline "\nint:";
+  print_endline (string_of_int (Calc_int.add 21 3));
+  print_endline (string_of_int (Calc_int.sub 21 3));
+  print_endline (string_of_int (Calc_int.mul 21 3));
+  print_endline (string_of_int (Calc_int.div 21 3));
+  print_endline (string_of_int (Calc_int.fact 4));
+
+  print_endline "\nfloat:";
+  print_endline (string_of_float (Calc_float.add 21. 3.));
+  print_endline (string_of_float (Calc_float.sub 21. 3.));
+  print_endline (string_of_float (Calc_float.mul 21. 3.));
+  print_endline (string_of_float (Calc_float.div 21. 3.));
+  print_endline (string_of_float (Calc_float.fact 4.));
