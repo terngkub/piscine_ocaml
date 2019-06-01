@@ -1,6 +1,6 @@
-NAME = try
+NAME = set
 
-SOURCES = try.ml main.ml
+SOURCES = set.ml main.ml
 
 CAMLC = ocamlc
 CAMLOPT = ocamlopt
