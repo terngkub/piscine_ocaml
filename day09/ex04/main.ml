@@ -26,8 +26,8 @@ let () =
   print_string "t2 union: ";
   print_set (Set.union t2 t3);
 
-  print_string "t2 intercept: ";
-  print_set (Set.intercept t2 t3);
+  print_string "t2 inter: ";
+  print_set (Set.inter t2 t3);
 
   print_string "t2 diff: ";
   print_set (Set.diff t2 t3);
