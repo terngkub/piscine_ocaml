@@ -17,19 +17,6 @@
     * day09 - monoid, monad
 * I put the subjects of each day in their directories.
 * Total score 125/100 (the extra 25 points are bonus).
-    | Day | Score | Note |
-    | --- | ----- | ---- |
-    | day00 | 100/100 | |
-    | day01 | 100/100 | |
-    | day02 | 100/100 | |
-    | day03 | 70/100 | |
-    | day04 | 100/100 | |
-    | rush00 | 66/100 | forgot to handle tie case |
-    | day05 | 110/100 | |
-    | day06 | 100/100 | |
-    | day07 | 120/100 | |
-    | day08 | 94/100 | |
-    | day09 | 95/100 | |
 * I want to learn monoid and monad concept on day09 so I took the time and didn't do rush01
 
 ### How to run the codes
